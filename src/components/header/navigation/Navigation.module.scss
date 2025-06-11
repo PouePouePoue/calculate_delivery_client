@@ -1,0 +1,26 @@
+.navigation {
+    padding-top: 20px;
+    width: 372;
+    height: 24;
+    position: fixed;
+    display: flex;
+    padding-left: 50px;
+    gap: 24px;
+    .navigationText {
+        font-family: Formular;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0%;
+        vertical-align: bottom;
+    }
+    .navigationText:hover {
+        font-family: Formular;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0%;
+        vertical-align: bottom;
+        color: #8B5CF6;
+    }
+}
