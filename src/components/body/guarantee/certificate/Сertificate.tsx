@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Сertificate.module.scss"
 import {CERTIFICATE} from "../../../../constants/index.constants"
-
+import CertificateBlock from "./certificateBlock/CertificateBlock"
 const Сertificate = () => {
     return (
         <div className={styles.certificate}>
@@ -9,10 +9,7 @@ const Сertificate = () => {
                 CERTIFICATE && 
                 CERTIFICATE?.map((item,index)=>{
                     return (
-                        <div className={styles.block}>
-                            <img src={item.img} className={styles.firstImg} alt="logo" /> 
-                            <p className={styles.certificateText}>{item.text}</p>
-                         </div>
+                        <CertificateBlock img = {item.img} text = {item.text}/>
                     )
                 })
             }
