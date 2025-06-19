@@ -1,0 +1,49 @@
+.calculateDelivery {
+    text-align: center;
+    margin-right: 50px;
+    display: flex;
+    width: 756px;
+    height: 584px;
+    border-radius: 16px;
+    background-color: #F9FAFB;
+    flex-direction: column;
+    
+    .calculateTextBox{
+        display: flex;
+        padding-left: 0;
+        flex-direction: column;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 0;
+        width: 358px;
+        height: 48px;
+        .calculateTitle {  
+        margin: 0;
+        font-family: Formular;
+        font-weight: 700;
+        font-size: 30px;
+        line-height: 36px;
+        letter-spacing: 0%;
+        vertical-align: middle;
+        }
+        .calculateText {
+            font-family: Formular;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: 0%;
+            text-align: center;
+            vertical-align: middle;
+        }
+    }
+    .calculateInput {
+        padding-top: 40px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;  
+    }
+    .buttonsStyles{
+        display: flex;
+        text-align: center;
+        justify-content: center;
+    }
+}

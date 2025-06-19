@@ -1,0 +1,34 @@
+.bodyText {
+    display: flex;
+    flex-direction: column;
+    width: 756px;
+    height: 584px;
+    padding-left: 30px;
+    gap: 12px;
+    .bodyTextTitle{
+        margin: 0;
+        font-family: Formular;
+        font-weight: 900;
+        font-size: 36px;
+        line-height: 40px;
+        letter-spacing: 0%;
+        vertical-align: middle;
+        color:#111827;
+    }
+    .bodyTextContent{
+        font-family: Formular;
+        font-weight: 500;
+        font-size: 22px;
+        line-height: 28px;
+        letter-spacing: 0%;
+        vertical-align: middle;
+        color:#111827;
+    }
+
+    .bodyTextImg {
+        width: 756px;
+        height: 352px;
+        border-radius: 16px;
+        
+    }
+}
