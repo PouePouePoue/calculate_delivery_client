@@ -1,0 +1,35 @@
+.guarantee{
+    padding-top: 100px;
+    .textBlock{ 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .guaranteeTitle{
+            display: flex;
+            justify-content: center;
+            font-family: Formular;
+            font-weight: 900;
+            font-size: 30px;
+            line-height: 36px;
+            letter-spacing: 0%;
+            vertical-align: middle;
+            color: #111827;
+         }
+        .guaranteeText {
+            width: 756px;
+            height: 72px;
+            display: flex;
+            justify-content: center;
+            font-family: Formular;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: 0%;
+            text-align: center;
+            vertical-align: middle;
+            
+        }
+    }
+    
+}
