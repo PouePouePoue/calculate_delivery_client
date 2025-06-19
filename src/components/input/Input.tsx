@@ -23,14 +23,14 @@ const Input: FC<InputProps> = ({
   };
 
   return (
-    <div className={styles.Input}>
-        <input
+    
+        <input className={styles.Input}
           type={type}
           value={inputValue}
           onChange={handleChange}
           placeholder={placeholder}
         />
-    </div>
+    
   );
 };
 
