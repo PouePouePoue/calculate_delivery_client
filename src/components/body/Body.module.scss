@@ -1,13 +1,21 @@
 .body {
     width: 100%;
-    .content{
+    .content {
         padding: 0 110px 0 110px;
-        .calculateSide{
+        .calculateSide {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
         }   
-        
+        .aboutUsSide {
+            padding-top: 50px;
+        }
+        .guaranteeSide {
+            padding-top: 100px;
+        }
+        .revieweSide {
+            padding-top: 50px;
+        }
     }
 
 }
