@@ -1,0 +1,90 @@
+.slider {
+
+    .titleText {
+        display: flex;
+        justify-content: center;
+        font-family: Formular;
+        font-weight: 900;
+        font-size: 30px;
+        line-height: 36px;
+        letter-spacing: 0%;
+        vertical-align: middle;
+        
+    }
+   
+
+   .sliderContainer {
+        width: 1536px;
+        height: 418px;
+        gap: 47px;
+        padding-right: 23px;
+        padding-left: 23px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .reviewsContent {
+            display: flex;
+            width: 1276px;
+            height: 418px;
+            gap: 32px;
+            .reviewsCard {
+                width: 626px;
+                height: 290px;
+                gap: 30px;
+                padding-top: 32px;
+                padding-right: 16px;
+                padding-bottom: 32px;
+                padding-left: 16px;
+                border-radius: 16px;
+                background: #F9FAFB;
+                display: flex;
+                position: relative;
+                .reviewsText {
+                    font-family: Formular;
+                    font-weight: 700;
+                    font-size: 24px;
+                    line-height: 32px;
+                    letter-spacing: 0%;
+
+                }
+                .reviewsAuthor {
+                    
+                    font-family: "Formular", sans-serif;
+                    font-weight: 300;
+                    font-size: 24px;
+                    line-height: 32px;
+                    letter-spacing: 0%;
+                    vertical-align: middle;
+                    color: #6B7280;
+                    position: absolute;
+                    bottom: 0;
+                    left: 10;
+                }
+                .reviewsQuote {
+                    width: 75.00000315904572px;
+                    height: 75.00000315904572px;
+                    position: absolute;
+                    right: 15px;
+                    bottom: 15px;
+                }
+            }   
+
+        }
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 100% ;
+            border-color: #8B5CF6;
+            font-size: 30px;
+            color: #8B5CF6;
+            border: 5px solid;
+        }
+
+        .navButton {
+            transform: scaleX(-1);
+        }
+    }
+}
