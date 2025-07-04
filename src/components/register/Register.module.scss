@@ -1,0 +1,31 @@
+.registerPage {
+    background-color:#E5E7EB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 900px;
+    .registerContainer {
+        background-color: #F9FAFB;
+        height: 500px;
+        width: 500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        .registerContent {
+            .registerLogo {
+                padding-left: 30px;
+            }
+            .registerInput {
+                padding-top:10px ;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .registerBtn {
+                padding-left: 75px;
+            }
+        }
+    }
+}
