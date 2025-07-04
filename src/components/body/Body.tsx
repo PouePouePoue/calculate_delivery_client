@@ -22,7 +22,7 @@ const Body = () => {
                     <Guarantee />
                 </div>
                 <div className={styles.revieweSide}>
-                    <ReviewsSlider Reviews={REVIEWS} />
+                    <ReviewsSlider reviews={REVIEWS} />
                 </div>
                 
             </div>   
