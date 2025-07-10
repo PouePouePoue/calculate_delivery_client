@@ -13,19 +13,17 @@
         align-items: center;
         padding: 0;
         margin: 0;
-        .registerContent {
-            .registerLogo {
-                padding-left: 30px;
-            }
+        .registerContent {   
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
             .registerInput {
-                padding-top:10px ;
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
             }
-            .registerBtn {
-                padding-left: 75px;
-            }
+            
         }
     }
 }

@@ -20,7 +20,7 @@ const Buttons: React.FC<ButtonsProps> = ({
   return (
     
     <button
-      className={styles.buttons} 
+      className={disabled === true ? styles.buttons + ' ' + styles.buttonDisabled : styles.buttons} 
       onClick={onClick}
       disabled={disabled}
     >

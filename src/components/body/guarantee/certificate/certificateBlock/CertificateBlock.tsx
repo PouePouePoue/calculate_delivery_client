@@ -10,9 +10,7 @@ const AboutUsBlock: React.FC<AboutUsBlockProps> = ({ img,  text }) => {
   return (
     <div className={styles.block}>
       <img src={img}  className={styles.firstImg} />
-      
-        <p className={styles.certificateText}>{text}</p>
-      
+      <p className={styles.certificateText}>{text}</p>
     </div>
   );
 };

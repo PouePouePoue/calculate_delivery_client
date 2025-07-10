@@ -10,7 +10,7 @@ const Register = () =>{
         <div className={styles.registerPage}>
             <div className={styles.registerContainer}>
                 <div className={styles.registerContent}>
-                    <p className={styles.registerLogo}><Logo /></p>
+                    <Logo />
                     <div className={styles.registerInput}>
                         <Input value={inputValue}
                         onChange={setInputValue}
@@ -25,7 +25,7 @@ const Register = () =>{
                         onChange={setInputValue}
                         placeholder="Подтвердите пароль" />
                     </div>
-                    <p className={styles.registerBtn}><Buttons text="Зарегестрироваться" onClick={() => alert('submit')} /></p>
+                    <Buttons text="Зарегестрироваться" onClick={() => alert('submit')} />
                 </div>
             </div>
         </div>

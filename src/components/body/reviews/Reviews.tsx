@@ -55,7 +55,7 @@ const ReviewsSlider: React.FC<ReviewsSliderProps> = ({ reviews }) => {
         
         <div className={styles.reviewsContent}>
           {visibleReviews.map((review) => (
-            <div key={review.id} className={styles.reviewsCard}>
+            <div key={'review_item_' + review.id} className={styles.reviewsCard}>
               <p className={styles.reviewsText}>{review.text}</p>
                 
               <p className={styles.reviewsAuthor}>{review.author}</p>

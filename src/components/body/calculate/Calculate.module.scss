@@ -7,8 +7,9 @@
     border-radius: 16px;
     background-color: #F9FAFB;
     flex-direction: column;
-    
+    gap: 15px;
     .calculateTextBox{
+        padding-top: 10px;
         display: flex;
         padding-left: 0;
         flex-direction: column;
@@ -45,5 +46,6 @@
         display: flex;
         text-align: center;
         justify-content: center;
+       
     }
 }

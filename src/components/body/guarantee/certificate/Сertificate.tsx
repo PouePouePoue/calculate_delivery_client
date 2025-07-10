@@ -9,7 +9,8 @@ const Сertificate = () => {
                 CERTIFICATE && 
                 CERTIFICATE?.map((item,index)=>{
                     return (
-                        <CertificateBlock img = {item.img} text = {item.text}/>
+
+                        <div key = {'Sertificate_block_' + index}><CertificateBlock img = {item.img} text = {item.text}/></div>
                     )
                 })
             }
