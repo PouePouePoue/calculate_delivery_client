@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import styles from  "./Input.module.scss"
 
 interface InputProps {
@@ -6,6 +6,7 @@ interface InputProps {
   onChange: (value: string) => void;
   placeholder?: string;
   type?: string;
+  onBlur?: () => void; // Добавленный пропс
 }
 
 const Input: FC<InputProps> = ({
@@ -13,8 +14,14 @@ const Input: FC<InputProps> = ({
   onChange,
   placeholder = '',
   type = 'text',
+  onBlur // Получаем новый пропс
 }) => {
   const [inputValue, setInputValue] = useState(value);
+
+  // Синхронизируем внутреннее состояние с внешним value
+  useEffect(() => {
+    setInputValue(value);
+  }, [value]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -28,6 +35,7 @@ const Input: FC<InputProps> = ({
           type={type}
           value={inputValue}
           onChange={handleChange}
+          onBlur={onBlur} // Добавляем обработчик потери фокуса
           placeholder={placeholder}
         />
     </div>
