@@ -4,10 +4,9 @@
     width: 756px;
     height: 584px;
     padding-left: 30px;
-    gap: 12px;
+    
     .bodyTextTitle{
         margin: 0;
-        
         font-weight: 900;
         font-size: 36px;
         line-height: 40px;
@@ -17,8 +16,8 @@
     }
     .bodyTextContent{
         font-family: "Formular";
-        font-weight: 500;
-        font-size: 22px;
+        font-weight: 400;
+        font-size: 20px;
         line-height: 28px;
         letter-spacing: 0%;
         vertical-align: middle;
@@ -27,7 +26,7 @@
 
     .bodyTextImg {
         width: 756px;
-        height: 352px;
+        height: 340px;
         border-radius: 16px;
         
     }
