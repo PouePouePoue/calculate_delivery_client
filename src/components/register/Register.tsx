@@ -4,7 +4,7 @@ import Logo from "../header/logo/Logo";
 import Input from "../input/Input";
 import Buttons from "../buttons/Buttons";
 
-// Компонент для поля пароля с текстовой кнопкой
+
 interface PasswordInputProps {
   value: string;
   onChange: (value: string) => void;
@@ -115,29 +115,29 @@ const Register = () => {
     let hasErrors = false;
     const newErrors = { ...errors };
 
-    // Обрезаем пробелы в начале и конце ФИО
+    
     const trimmedFullName = fullName.trim();
     setFullName(trimmedFullName);
 
-    // Проверка ФИО
+    
     if (!trimmedFullName) {
       newErrors.fullName = 'ФИО не может быть пустым';
       hasErrors = true;
     }
 
-    // Проверка валидности email
+    
     if (!validateEmail(email)) {
       newErrors.email = 'Некорректный формат email';
       hasErrors = true;
     }
 
-    // Проверка сложности пароля
+    
     if (!isPasswordValid(password)) {
       newErrors.password = 'Пароль должен содержать минимум 8 символов, буквы и цифры';
       hasErrors = true;
     }
 
-    // Проверка совпадения паролей
+    
     if (password !== confirmPassword) {
       newErrors.passwordMatch = 'Пароли не совпадают';
       hasErrors = true;
@@ -147,7 +147,7 @@ const Register = () => {
     
     if (hasErrors) return;
     
-    // Если все проверки пройдены
+    
     alert('Регистрация успешна!');
   };
 

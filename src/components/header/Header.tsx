@@ -23,14 +23,14 @@ const Header: React.FC = () => {
         <div className={styles.content}>
           <div className={styles.leftSide}>
             <Logo />
-            <Navigation />
+            
           </div>
+          <Navigation />
           <div className={styles.rightSide}> 
             <ExchangeRate /> 
             <div className={styles.buttonsStyle}>
               
               <Buttons text="Войти" onClick={openLoginModal} />
-              <Buttons text="Оставить заявку" onClick={() => alert('submit')} />
             </div>
           </div>
         </div>
