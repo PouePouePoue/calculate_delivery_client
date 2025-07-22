@@ -1,5 +1,5 @@
 .slider {
-
+    
     .titleText {
         display: flex;
         justify-content: center;
@@ -17,13 +17,13 @@
         width: 1536px;
         height: 418px;
         gap: 47px;
-        padding-right: 23px;
-        padding-left: 23px;
         display: flex;
         align-items: center;
         justify-content: center;
+        padding-left: 75px;
         .reviewsContent {
             display: flex;
+            justify-content: center;
             width: 1276px;
             height: 418px;
             gap: 32px;

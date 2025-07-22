@@ -5,6 +5,7 @@ import Navigation from "./navigation/Navigation";
 import ExchangeRate from "./exchangeRate/ExchangeRate";
 import Buttons from "../buttons/Buttons";
 import LoginModal from "../body/loginModal/LoginModal";
+import CurrencyExchangeRates from "./currencyExchangeRates/CurrencyExchangeRates";
 
 const Header: React.FC = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -27,7 +28,8 @@ const Header: React.FC = () => {
           </div>
           <Navigation />
           <div className={styles.rightSide}> 
-            <ExchangeRate /> 
+           
+            <CurrencyExchangeRates />
             <div className={styles.buttonsStyle}>
               
               <Buttons text="Войти" onClick={openLoginModal} />
