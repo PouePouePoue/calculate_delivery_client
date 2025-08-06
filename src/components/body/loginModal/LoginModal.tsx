@@ -6,9 +6,14 @@ import { Link } from 'react-router-dom';
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onLoginSuccess?: () => void; // Опциональный колбэк при успешном входе
 }
 
-const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
+interface ServerError {
+  message: string;
+}
+
+const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLoginSuccess }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState({
     email: '',
@@ -19,7 +24,8 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
     password: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isFormValid, setIsFormValid] = useState(false); 
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -45,23 +51,26 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
     };
   }, [isOpen, onClose]);
 
-  
+  // Проверка валидности формы
   useEffect(() => {
     const checkFormValidity = () => {
-      
       const fieldsFilled = formData.email.trim() !== '' && formData.password.trim() !== '';
-      
-      
       const noErrors = errors.email === '' && errors.password === '';
-      
-      
       setIsFormValid(fieldsFilled && noErrors);
     };
 
     checkFormValidity();
-  }, [formData, errors]); 
+  }, [formData, errors]);
 
-  
+  // Очистка формы при открытии модального окна
+  useEffect(() => {
+    if (isOpen) {
+      setFormData({ email: '', password: '' });
+      setErrors({ email: '', password: '' });
+      setServerError(null);
+    }
+  }, [isOpen]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -69,7 +78,6 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
       [name]: value
     }));
     
-   
     if (errors[name as keyof typeof errors]) {
       setErrors(prev => ({
         ...prev,
@@ -77,11 +85,9 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
       }));
     }
     
-    
-    validateField(name, value);
+    if (serverError) setServerError(null);
   };
 
-  
   const validateField = (fieldName: string, value: string) => {
     let errorMessage = '';
     
@@ -113,7 +119,6 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
     }));
   };
 
-  
   const validateForm = (): boolean => {
     validateField('email', formData.email);
     validateField('password', formData.password);
@@ -121,22 +126,46 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
     return errors.email === '' && errors.password === '';
   };
 
-  
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (validateForm()) {
-      setIsSubmitting(true);
+    if (!validateForm()) return;
+    
+    setIsSubmitting(true);
+    setServerError(null);
+    
+    try {
+      const response = await fetch('http://localhost:3001/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password
+        })
+      });
+
+      const data = await response.json();
       
+      if (!response.ok) {
+        throw new Error(data.message || 'Ошибка входа');
+      }
       
-      console.log('Данные для входа:', formData);
+      // Успешная авторизация
+      console.log('Успешный вход:', data);
       
+      // Закрываем модальное окно
+      onClose();
       
-      setTimeout(() => {
-        setIsSubmitting(false);
-        alert('Вход выполнен успешно!');
-        onClose();
-      }, 1000);
+      // Вызываем колбэк успешного входа, если он предоставлен
+      if (onLoginSuccess) onLoginSuccess();
+      
+    } catch (error: any) {
+      console.error('Ошибка входа:', error);
+      setServerError(error.message || 'Произошла ошибка при входе');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -189,6 +218,12 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
               </div>
             )}
           </div>
+          
+          {serverError && (
+            <div className={styles.serverError}>
+              {serverError}
+            </div>
+          )}
           
           <div className={styles.buttonEnter}>
             <Buttons 

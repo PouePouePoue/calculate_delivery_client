@@ -4,7 +4,6 @@ import Logo from "../header/logo/Logo";
 import Input from "../input/Input";
 import Buttons from "../buttons/Buttons";
 
-
 interface PasswordInputProps {
   value: string;
   onChange: (value: string) => void;
@@ -52,13 +51,14 @@ const Register = () => {
     password: '',
     passwordMatch: ''
   });
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [serverMessage, setServerMessage] = useState<{type: 'success' | 'error', text: string} | null>(null);
 
   const validateEmail = (email: string): boolean => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   };
 
-  // Функция проверки сложности пароля
   const isPasswordValid = (pwd: string): boolean => {
     return pwd.length >= 8 && 
            /[a-zA-Zа-яА-Я]/.test(pwd) &&
@@ -111,32 +111,27 @@ const Register = () => {
     if (errors.passwordMatch) setErrors(prev => ({ ...prev, passwordMatch: '' }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     let hasErrors = false;
     const newErrors = { ...errors };
-
     
     const trimmedFullName = fullName.trim();
     setFullName(trimmedFullName);
-
     
     if (!trimmedFullName) {
       newErrors.fullName = 'ФИО не может быть пустым';
       hasErrors = true;
     }
-
     
     if (!validateEmail(email)) {
       newErrors.email = 'Некорректный формат email';
       hasErrors = true;
     }
-
     
     if (!isPasswordValid(password)) {
       newErrors.password = 'Пароль должен содержать минимум 8 символов, буквы и цифры';
       hasErrors = true;
     }
-
     
     if (password !== confirmPassword) {
       newErrors.passwordMatch = 'Пароли не совпадают';
@@ -147,8 +142,47 @@ const Register = () => {
     
     if (hasErrors) return;
     
+    setIsLoading(true);
+    setServerMessage(null);
     
-    alert('Регистрация успешна!');
+    try {
+      const response = await fetch('http://localhost:3001/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          fullName: trimmedFullName,
+          email,
+          password
+        })
+      });
+
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.message || 'Ошибка регистрации');
+      }
+      
+      setServerMessage({
+        type: 'success',
+        text: 'Регистрация успешна!'
+      });
+      
+      // Очистка формы после успешной регистрации
+      setFullName('');
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+      
+    } catch (error: any) {
+      setServerMessage({
+        type: 'error',
+        text: error.message || 'Произошла ошибка при отправке данных'
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const isFormValid = 
@@ -220,10 +254,21 @@ const Register = () => {
           
           {/* Кнопка регистрации */}
           <Buttons 
-            text="Зарегистрироваться" 
+            text={isLoading ? "Отправка..." : "Зарегистрироваться"} 
             onClick={handleSubmit}
-            disabled={!isFormValid}
+            disabled={!isFormValid || isLoading}
           />
+
+          {/* Сообщение от сервера */}
+          {serverMessage && (
+            <div className={
+              serverMessage.type === 'success' 
+                ? styles.successMessage 
+                : styles.errorMessage
+            }>
+              {serverMessage.text}
+            </div>
+          )}
         </div>
       </div>
     </div>
