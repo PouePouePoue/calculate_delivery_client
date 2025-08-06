@@ -34,7 +34,7 @@ const CurrencyExchangeRates: React.FC = () => {
         setRates([
           { code: 'USD', symbol: '$', rate: data.Valute.USD.Value },
           { code: 'EUR', symbol: '€', rate: data.Valute.EUR.Value },
-          { code: 'CNY', symbol: '¥', rate: data.Valute.CNY.Value / 10 } // API возвращает курс за 10 юаней
+          { code: 'CNY', symbol: '¥', rate: data.Valute.CNY.Value } 
         ]);
         
         setError(null);

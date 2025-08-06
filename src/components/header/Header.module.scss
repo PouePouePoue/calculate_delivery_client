@@ -3,23 +3,23 @@
     width: 100%;
     padding: 10px  0 0;
     background-color: #F9FAFB;
+    
+    
     .content {    
         display: flex;
         justify-content: space-between;
-        
+        align-items: flex-start;
         padding: 0 140px 0 140px;
         .leftSide {
             text-align: left;
         }
         .rightSide {
             display: flex;
-            align-items: flex-start;
+            
             text-align: right;
         }
         .buttonsStyle{
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
+            padding-top: 10px;
             
         }
     }  
