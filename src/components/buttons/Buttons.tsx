@@ -3,7 +3,7 @@ import styles from "./Buttons.module.scss"
 
 interface ButtonsProps {
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
   className?: string;
   disabled?: boolean;
   children?: React.ReactNode;
