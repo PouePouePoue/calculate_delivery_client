@@ -17,6 +17,52 @@
             display: flex;
             
             text-align: right;
+            .profileContainer {
+                position: relative;
+                cursor: pointer;
+                }
+
+                .profileIcon {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 12px;
+                border-radius: 4px;
+                transition: background-color 0.2s;
+
+                &:hover {
+                    background-color: #f5f5f5;
+                }
+                }
+
+                .userName {
+                font-size: 14px;
+                font-weight: 500;
+                color: #333;
+                }
+
+                .profileDropdown {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                background: white;
+                border-radius: 4px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                min-width: 150px;
+                z-index: 1000;
+                margin-top: 8px;
+                }
+
+                .dropdownItem {
+                padding: 12px 16px;
+                cursor: pointer;
+                transition: background-color 0.2s;
+                font-size: 14px;
+
+                &:hover {
+                    background-color: #f5f5f5;
+                }
+                }
         }
         .buttonsStyle{
             padding-top: 10px;

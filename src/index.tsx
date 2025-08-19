@@ -5,6 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import RegisterPage from './pages/RegisterPage';
+import AuthorizedPage from './pages/AuthorizedPage';
+import AdminPage from './pages/AdminPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -14,6 +16,8 @@ root.render(
     <BrowserRouter>
       <Routes>
           <Route path='/register' element = {<RegisterPage />} />
+          <Route path='/authorized' element = {<AuthorizedPage />} />
+          <Route path='/admin' element = {<AdminPage />} />
           <Route path = "*" element = {<App />}/>
       </Routes>
      

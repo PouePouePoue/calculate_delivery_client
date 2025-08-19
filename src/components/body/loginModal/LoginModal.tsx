@@ -1,19 +1,32 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './LoginModal.module.scss';
 import Buttons from '../../buttons/Buttons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onLoginSuccess?: () => void; // Опциональный колбэк при успешном входе
+  onLoginSuccess?: (userData: any) => void; 
 }
 
 interface ServerError {
   message: string;
 }
 
+interface UserData {
+  id: number;
+  fullName: string;
+  email: string;
+  isAdmin: boolean;
+}
+
+interface LoginResponse {
+  message: string;
+  user: UserData;
+}
+
 const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLoginSuccess }) => {
+  const navigate = useNavigate();
   const modalRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState({
     email: '',
@@ -146,7 +159,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLoginSuccess
         })
       });
 
-      const data = await response.json();
+      const data: LoginResponse = await response.json();
       
       if (!response.ok) {
         throw new Error(data.message || 'Ошибка входа');
@@ -155,11 +168,24 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLoginSuccess
       // Успешная авторизация
       console.log('Успешный вход:', data);
       
+      // Сохраняем данные пользователя в localStorage
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('userData', JSON.stringify(data.user));
+      
+      // Вызываем колбэк успешного входа с данными пользователя
+      if (onLoginSuccess) {
+        onLoginSuccess(data.user);
+      }
+      
       // Закрываем модальное окно
       onClose();
       
-      // Вызываем колбэк успешного входа, если он предоставлен
-      if (onLoginSuccess) onLoginSuccess();
+      // Перенаправляем в зависимости от прав пользователя
+      if (data.user.isAdmin) {
+        navigate('/admin');
+      } else {
+        navigate('/authorized');
+      }
       
     } catch (error: any) {
       console.error('Ошибка входа:', error);
@@ -228,7 +254,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLoginSuccess
           <div className={styles.buttonEnter}>
             <Buttons 
               text={isSubmitting ? "Вход..." : "Войти"} 
-              onClick={() => alert('submit')}
+              
               disabled={!isFormValid || isSubmitting} 
             />
           </div>

@@ -3,6 +3,7 @@ import styles from "./Register.module.scss";
 import Logo from "../header/logo/Logo";
 import Input from "../input/Input";
 import Buttons from "../buttons/Buttons";
+import { useNavigate } from 'react-router-dom';
 
 interface PasswordInputProps {
   value: string;
@@ -10,6 +11,13 @@ interface PasswordInputProps {
   placeholder: string;
   showPassword: boolean;
   onToggleShowPassword: () => void;
+}
+
+interface UserDataFromServer {
+  id: number;
+  full_name: string;
+  email: string;
+  can_access_admin: boolean;
 }
 
 const PasswordInput: React.FC<PasswordInputProps> = ({
@@ -39,6 +47,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
 };
 
 const Register = () => {
+  const navigate = useNavigate();
   const [fullName, setFullName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -164,16 +173,31 @@ const Register = () => {
         throw new Error(data.message || 'Ошибка регистрации');
       }
       
+      // Сервер возвращает данные пользователя напрямую, а не в поле user
+      const userDataFromServer = data as UserDataFromServer;
+      
+      // Сохраняем данные пользователя в localStorage
+      const userData = {
+        id: userDataFromServer.id,
+        fullName: userDataFromServer.full_name,
+        email: userDataFromServer.email,
+        isAdmin: userDataFromServer.can_access_admin
+      };
+      
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('userData', JSON.stringify(userData));
+      
       setServerMessage({
         type: 'success',
         text: 'Регистрация успешна!'
       });
       
-      // Очистка формы после успешной регистрации
-      setFullName('');
-      setEmail('');
-      setPassword('');
-      setConfirmPassword('');
+      // Перенаправляем в зависимости от прав пользователя
+      if (userData.isAdmin) {
+        navigate('/admin');
+      } else {
+        navigate('/authorized');
+      }
       
     } catch (error: any) {
       setServerMessage({
