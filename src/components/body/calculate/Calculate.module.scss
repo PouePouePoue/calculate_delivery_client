@@ -48,4 +48,23 @@
         justify-content: center;
        
     }
+    .errorText {
+    color: #ff3333;
+    font-size: 12px;
+    display: block;
+    margin-top: 1px;
+    }
+
+    .successMessage {
+    color: green;
+    margin: 5px 0;
+    text-align: center;
+    }
+
+    .errorMessage {
+    color: #ff3333;
+    margin: 5px 0;
+    text-align: center;
+    }
+ 
 }
