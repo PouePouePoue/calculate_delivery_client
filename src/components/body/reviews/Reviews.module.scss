@@ -87,5 +87,27 @@
         .navButton {
             transform: scaleX(-1);
         }
+        
+    }
+        .buttonContainer {
+    display: flex;
+    justify-content: center;
+    
+    }
+
+    .reviewButton {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 24px;
+    
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #0056b3;
+    }
     }
 }

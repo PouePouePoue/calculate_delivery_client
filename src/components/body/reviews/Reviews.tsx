@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Reviews } from '../../../types/reviews';
-import styles from './Reviews.module.scss'; // Импорт стилей
+import styles from './Reviews.module.scss';
 import reviewsQuote from "./reviewsQuote.png"
+import Buttons from '../../buttons/Buttons';
 
 interface ReviewsSliderProps {
   reviews: Reviews[];
+  isAuthenticated: boolean; // Добавляем пропс для проверки авторизации
 }
 
 const itemsPerPage = 2;
 
-const ReviewsSlider: React.FC<ReviewsSliderProps> = ({ reviews }) => {
+const ReviewsSlider: React.FC<ReviewsSliderProps> = ({ reviews, isAuthenticated }) => {
   const [startIndex, setStartIndex] = useState(0);
   const [visibleReviews, setVisibleReviews] = useState<Reviews[]>([]);
   
-  // Определяем количество элементов для отображения
-
-  
   useEffect(() => {
-    // Получаем подмассив для отображения
     const endIndex = Math.min(startIndex + itemsPerPage, reviews.length);
     const visible = reviews.slice(startIndex, endIndex);
     
-    // Если в конце списка остался только один элемент, добавляем первый для заполнения
     if (visible.length < itemsPerPage && reviews.length > itemsPerPage) {
       const additionalItems = reviews.slice(0, itemsPerPage - visible.length);
       setVisibleReviews([...visible, ...additionalItems]);
@@ -57,7 +54,6 @@ const ReviewsSlider: React.FC<ReviewsSliderProps> = ({ reviews }) => {
           {visibleReviews.map((review) => (
             <div key={'review_item_' + review.id} className={styles.reviewsCard}>
               <p className={styles.reviewsText}>{review.text}</p>
-                
               <p className={styles.reviewsAuthor}>{review.author}</p>
               <img src={reviewsQuote} className={styles.reviewsQuote} alt="reviewsQuote" /> 
             </div>
@@ -65,12 +61,21 @@ const ReviewsSlider: React.FC<ReviewsSliderProps> = ({ reviews }) => {
         </div>
         
         <button 
-          
+          className={styles.navButton} 
           onClick={nextSlide}
         >
           ➔
         </button>
       </div>
+
+      {/* Кнопка для авторизованных пользователей */}
+      {isAuthenticated && (
+        <div className={styles.buttonContainer}>
+          <Buttons className={styles.reviewButton} text={'Оставить отзыв'} />
+            
+          
+        </div>
+      )}
     </div>
   );
 };
